@@ -1,20 +1,165 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Visualising Data</title>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" href="assets/css/main.css" />
+  <meta charset="utf-8" />
+  <title>Visualising Data</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+  <style>
+    html, body {
+      width: 100%;
+      height: 100%;
+      min-height: 100%;
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    #wrapper, #main, .article-wrapper {
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+    #main {
+      padding: 3.5rem clamp(.75rem, 4vw, 2rem);
+      margin: 0 auto;
+    }
+    .article-wrapper {
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 520ms ease, transform 520ms ease;
+      position: relative;
+      width: 100%;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: clamp(0.75rem, 4vw, 2rem);
+      overflow-x: hidden;
+      box-sizing: border-box;
+    }
+    .article-wrapper.visible { opacity: 1; transform: none; }
+    .article-wrapper .close {
+      position: absolute;
+      right: clamp(0.75rem, 4vw, 2rem);
+      top: clamp(0.6rem, 2.5vw, 1.4rem);
+      display: inline-block;
+      color: #fff;
+      background: rgba(0,0,0,0.35);
+      width: 36px;
+      height: 36px;
+      line-height: 36px;
+      text-align: center;
+      border-radius: 50%;
+      text-decoration: none;
+      font-weight: 700;
+      transition: background .2s ease, transform .2s ease;
+      z-index: 5;
+    }
+    .article-wrapper .close:hover { background: rgba(0,0,0,0.55); transform: translateY(-2px); }
+    h2.major {
+      margin: 0 0 1rem 0;
+      line-height: 1.05;
+      font-weight: 700;
+      font-size: clamp(1.05rem, 3.2vw, 1.25rem);
+    }
+    .image.main, .image.main img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 0 auto 1rem;
+    }
+    .image.main img {
+      width: 100%;
+      height: 320px;          
+      max-height: 45vh;       
+      object-fit: cover;      
+      object-position: center;
+      display: block;
+      border-radius: 4px;
+    }
+    @media (max-width: 480px) {
+      .image.main img {
+        height: 220px;        
+        max-height: 35vh;
+      }
+    }
+    #bg {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background: linear-gradient(180deg, rgba(12,34,56,0.85) 0%, rgba(28,45,70,0.9) 60%), url('images/bg-noise.png');
+      background-size: cover, 400px 400px;
+      pointer-events: none;
+    }
+    #bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(0,0,0,0) 40%, rgba(0,0,0,0.25) 100%);
+      pointer-events: none;
+    }
+    @media (max-width: 480px) {
+      #main { padding: 1.6rem 0.8rem; }
+      .article-wrapper { padding: 0.9rem; }
+      .article-wrapper .close { right: 0.8rem; top: 0.8rem; width: 32px; height: 32px; line-height: 32px; }
+      body { -webkit-text-size-adjust: 100%; }
+    }
+    img, iframe, embed, video, svg {
+      max-width: 100% !important;
+      width: auto !important;
+      height: auto !important;
+      display: block;
+    }
+  </style>
 </head>
-<body>
-    <header>
-        <h1>Visualising Data</h1>
-        <a href="index.html#modules">Back to Modules</a>
+<body class="is-preload">
+  <div id="wrapper">
+    <header id="header" aria-hidden="true">
+      <nav><ul></ul></nav>
     </header>
-    <main style="margin: 0 24px;">
+
+    <div id="main">
+      <article id="modules" class="active article-wrapper" role="article" aria-labelledby="module-title">
+        <a href="index.html#modules" class="close" aria-label="Back to Modules">×</a>
+
+        <h2 id="module-title" class="major">Visualising Data</h2>
+
         <span class="image main">
-            <img src="images/data-vis-pic.jpg" alt="" style="max-width: 400px; width: 100%; height: auto; display: block; margin: 0 auto;" />
+          <img src="images/data-vis-pic.jpg" alt="Visualising Data" />
         </span>
-        <p>Content about the Visualising Data module goes here.</p>
-    </main>
+
+        <p>This module introduces techniques and tools for presenting data visually. Topics include chart selection, design principles, interactive visualisation and using libraries such as D3.js and charting tools.</p>
+
+        <section>
+          <h3 class="major">Topics & Learning Outcomes</h3>
+          <ul>
+            <li>Principles of effective visual communication</li>
+            <li>Choosing the right chart and visual encoding</li>
+            <li>Introduction to interactive visualisations</li>
+            <li>Using common libraries and tools for visualization</li>
+          </ul>
+
+          <h4 class="minor">Unit 1: TBC</h4>
+          <p>TBC.</p>
+        </section>
+      </article>
+    </div>
+
+    <footer id="footer"></footer>
+  </div>
+
+  <div id="bg"></div>
+
+  <script>
+    (function() {
+      window.addEventListener('load', function() {
+        document.body.classList.remove('is-preload');
+        const art = document.querySelector('.article-wrapper');
+        setTimeout(function(){ art && art.classList.add('visible'); }, 80);
+      });
+    })();
+  </script>
 </body>
 </html>
