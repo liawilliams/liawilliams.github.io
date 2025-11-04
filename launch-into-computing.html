@@ -1,20 +1,164 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Launch into Computing</title>
     <meta charset="utf-8" />
+    <title>Launch into Computing</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+
+    <style>
+      html, body {
+        width: 100%;
+        height: 100%;
+        min-height: 100%;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+      }
+
+      *, *::before, *::after { box-sizing: border-box; }
+
+      #wrapper, #main, .article-wrapper {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+      }
+
+      #main {
+        padding: 3.5rem clamp(.75rem, 4vw, 2rem);
+        margin: 0 auto;
+      }
+
+      .article-wrapper {
+        opacity: 0;
+        transform: translateY(12px);
+        transition: opacity 520ms ease, transform 520ms ease;
+        position: relative;
+        width: 100%;
+        max-width: 980px;
+        margin: 0 auto;
+        padding: clamp(0.75rem, 4vw, 2rem);
+        overflow-x: hidden;
+        box-sizing: border-box;
+      }
+      .article-wrapper.visible { opacity: 1; transform: none; }
+
+      .article-wrapper .close {
+        position: absolute;
+        right: clamp(0.75rem, 4vw, 2rem);
+        top: clamp(0.6rem, 2.5vw, 1.4rem);
+        display: inline-block;
+        color: #fff;
+        background: rgba(0,0,0,0.35);
+        width: 36px;
+        height: 36px;
+        line-height: 36px;
+        text-align: center;
+        border-radius: 50%;
+        text-decoration: none;
+        font-weight: 700;
+        transition: background .2s ease, transform .2s ease;
+        z-index: 5;
+      }
+      .article-wrapper .close:hover { background: rgba(0,0,0,0.55); transform: translateY(-2px); }
+
+      h2.major {
+        margin: 0 0 1rem 0;
+        line-height: 1.05;
+        font-weight: 700;
+        font-size: clamp(1.05rem, 3.2vw, 1.25rem);
+      }
+
+      .image.main, .image.main img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+        margin: 0 auto 1rem;
+      }
+      .image.main img { width: 100%; height: auto; display: block; }
+
+      #bg {
+        position: fixed;
+        inset: 0;
+        z-index: -2;
+        background: linear-gradient(180deg, rgba(12,34,56,0.85) 0%, rgba(28,45,70,0.9) 60%), url('images/bg-noise.png');
+        background-size: cover, 400px 400px;
+        pointer-events: none;
+      }
+      #bg::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse at center, rgba(0,0,0,0) 40%, rgba(0,0,0,0.25) 100%);
+        pointer-events: none;
+      }
+
+      @media (max-width: 480px) {
+        #main { padding: 1.6rem 0.8rem; }
+        .article-wrapper { padding: 0.9rem; }
+        .article-wrapper .close { right: 0.8rem; top: 0.8rem; width: 32px; height: 32px; line-height: 32px; }
+        body { -webkit-text-size-adjust: 100%; }
+      }
+
+      img, iframe, embed, video, svg {
+        max-width: 100% !important;
+        width: auto !important;
+        height: auto !important;
+        display: block;
+      }
+    </style>
 </head>
-<body>
-    <header>
-        <h1>Launch into Computing</h1>
-        <a href="index.html#modules">Back to Modules</a>
+<body class="is-preload">
+  <div id="wrapper">
+    <header id="header" aria-hidden="true">
+      <nav><ul></ul></nav>
     </header>
-    <main style="margin: 0 24px;">
+
+    <div id="main">
+      <article id="modules" class="active article-wrapper" role="article" aria-labelledby="module-title">
+        <a href="index.html#modules" class="close" aria-label="Back to Modules">×</a>
+
+        <h2 id="module-title" class="major">Launch into Computing</h2>
+
         <span class="image main">
-            <img src="images/launch-into-comp-pic.jpg" alt="" style="max-width: 400px; width: 100%; height: auto; display: block; margin: 0 auto;" />
+          <img src="images/launch-into-comp-pic.jpg" alt="Launch into Computing" />
         </span>
-        <p>Content about the Launch into Computing module goes here.</p>
-    </main>
+
+        <p>The Launch into Computing module introduces core computing concepts for beginners: basic programming, problem solving, computational thinking, and an introduction to common tools and workflows.</p>
+
+        <section>
+          <h3 class="major">Topics & Learning Outcomes</h3>
+          <ul>
+            <li>Fundamentals of programming and algorithms</li>
+            <li>Computational thinking and problem decomposition</li>
+            <li>Introductory use of development tools (editors, terminals, version control)</li>
+            <li>Basic data structures and control flow</li>
+          </ul>
+
+          <h4 class="minor">Unit 1: What is Computing?</h4>
+          <p>I had the opportunity to discuss the impact that data science has on the fashion industry. Mine, along with my peers' discussion posts, can be found here.</p>
+          <h4 class="minor">Unit 12: Future Trends and Concepts of Computing</h4>
+          <p>I was required to deliver a presentation on an area of computing for my end of module assignment. I focused on AI, evaluating the opportunities, risks, strengths, and limitations of the technology. My presentation and transcript can be found here.</p>  
+        </section>
+      </article>
+    </div>
+
+    <footer id="footer"></footer>
+  </div>
+
+  <div id="bg"></div>
+
+  <script>
+    (function() {
+      window.addEventListener('load', function() {
+        document.body.classList.remove('is-preload');
+        const art = document.querySelector('.article-wrapper');
+        setTimeout(function(){ art && art.classList.add('visible'); }, 80);
+      });
+    })();
+  </script>
 </body>
 </html>
