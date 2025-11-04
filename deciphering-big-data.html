@@ -6,26 +6,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="assets/css/main.css" />
     <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-
-    <!-- Local styles to reproduce Modules fade + background aesthetics without the SPA JS -->
     <style>
-      /* container for the article to animate */
+      html, body {
+        width: 100%;
+        height: 100%;
+        min-height: 100%;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+      }
+      *, *::before, *::after { box-sizing: border-box; }
+      #wrapper, #main, .article-wrapper {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+      }
+      #main {
+        padding: 3.5rem clamp(.75rem, 4vw, 2rem);
+        margin: 0 auto;
+      }
       .article-wrapper {
         opacity: 0;
         transform: translateY(12px);
         transition: opacity 520ms ease, transform 520ms ease;
         position: relative;
+        width: 100%;
+        max-width: 980px;
+        margin: 0 auto;
+        padding: clamp(0.75rem, 4vw, 2rem);
+        overflow-x: hidden;
+        box-sizing: border-box;
       }
-      .article-wrapper.visible {
-        opacity: 1;
-        transform: none;
-      }
-
-      /* close button style similar to template */
+      .article-wrapper.visible { opacity: 1; transform: none; }
       .article-wrapper .close {
         position: absolute;
-        right: 2rem;
-        top: 1.4rem;
+        right: clamp(0.75rem, 4vw, 2rem);
+        top: clamp(0.6rem, 2.5vw, 1.4rem);
         display: inline-block;
         color: #fff;
         background: rgba(0,0,0,0.35);
@@ -40,30 +58,27 @@
         z-index: 5;
       }
       .article-wrapper .close:hover { background: rgba(0,0,0,0.55); transform: translateY(-2px); }
-
-      /* keep image responsive and centered (matches Modules look) */
-      .image.main img {
-        max-width: 50rem;
-        width: 100%;
-        height: auto;
-        display: block;
-        margin: 0 auto 1.5rem;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        border-radius: 4px;
+      h2.major {
+        margin: 0 0 1rem 0;
+        line-height: 1.05;
+        font-weight: 700;
+        font-size: clamp(1.05rem, 3.2vw, 1.25rem);
       }
-
-      /* page background aesthetics similar to template's BG */
+      .image.main, .image.main img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+        margin: 0 auto 1rem;
+      }
+      .image.main img { width: 100%; height: auto; display: block; }
       #bg {
         position: fixed;
         inset: 0;
         z-index: -2;
         background: linear-gradient(180deg, rgba(12,34,56,0.85) 0%, rgba(28,45,70,0.9) 60%), url('images/bg-noise.png');
         background-size: cover, 400px 400px;
-        filter: saturate(1.05) contrast(.98);
         pointer-events: none;
       }
-
-      /* subtle vignette overlay */
       #bg::after {
         content: "";
         position: absolute;
@@ -71,40 +86,31 @@
         background: radial-gradient(ellipse at center, rgba(0,0,0,0) 40%, rgba(0,0,0,0.25) 100%);
         pointer-events: none;
       }
-
-      /* ensure main container spacing like Modules */
-      #main { padding: 3.5rem 2rem; max-width: 980px; margin: 0 auto; }
-
       @media (max-width: 480px) {
-        .article-wrapper .close { right: 1rem; top: 1rem; width: 32px; height: 32px; line-height: 32px; }
-        #main { padding: 2rem 1rem; }
+        #main { padding: 1.6rem 0.8rem; }
+        .article-wrapper { padding: 0.9rem; }
+        .article-wrapper .close { right: 0.8rem; top: 0.8rem; width: 32px; height: 32px; line-height: 32px; }
+        body { -webkit-text-size-adjust: 100%; }
+      }
+      img, iframe, embed, video, svg {
+        max-width: 100% !important;
+        width: auto !important;
+        height: auto !important;
+        display: block;
       }
     </style>
 </head>
 <body class="is-preload">
-    <!-- Wrapper -->
     <div id="wrapper">
-        <!-- Header (kept minimal for page parity) -->
         <header id="header" aria-hidden="true">
-            <nav>
-                <ul>
-                    <!-- intentionally empty to match Modules appearance -->
-                </ul>
-            </nav>
+            <nav><ul></ul></nav>
         </header>
-
-        <!-- Main -->
         <div id="main">
-            <!-- Article wrapper: will fade in on load -->
             <article id="modules" class="active article-wrapper">
-                <!-- close button - returns to Modules on the home page -->
                 <a href="index.html#modules" class="close" aria-label="Back to Modules">×</a>
-
                 <h2 class="major">Deciphering Big Data</h2>
                 <span class="image main"><img src="images/big-data-pic.jpg" alt="Deciphering Big Data" /></span>
-
                 <p>The Deciphering Big Data module introduces methods and tools for handling, processing and interpreting large-scale datasets. Topics include distributed storage, data pipelines, basic map-reduce concepts, and practical techniques for cleaning and summarising big data.</p>
-
                 <section>
                   <h3 class="major">Topics & Learning Outcomes</h3>
                   <ul>
@@ -113,25 +119,24 @@
                     <li>Practical techniques for cleaning and summarising large datasets</li>
                     <li>Introductory map-reduce concepts and scaling considerations</li>
                   </ul>
+                  <h4 class="minor">Unit 1: Introduction to Big Data Technologies and Data Management</h4>
+                  <p>The introductory unit in this module introduced big data and its associated technologies, in addition to concepts which underpin data management and how these are used to manipulate big data in organisations.</p>
+                  <p>I was tasked with critically evaluating the rationale behind the Internet of Things (IoT) and assess the opportunities, limitations, risks and challenges associated with this method of large-scale data collection.</p>
+                  <p>I participated in a discussion to collaborate with my peers. My posts, along with my peers', can be found here.</p>
+                  <h4 class="minor">Unit 3: Data Collection and Storage</h4>
+                  <p>Unit 3 focused heavily on data collection and subsequent storage, using techniques such as web scraping. I was also introduced to the BeautifulSoup library in Python and completed an activity to employ web scraping.</p>
+                  <p>Access my coding file for this activity here.</p>
                 </section>
             </article>
         </div>
-
-        <!-- Footer -->
         <footer id="footer"></footer>
     </div>
-
-    <!-- BG -->
     <div id="bg"></div>
-
-    <!-- Small script to trigger the fade-in and remove preload class -->
     <script>
       (function() {
-        // remove template preload class after a short delay so CSS transitions play
         window.addEventListener('load', function() {
           document.body.classList.remove('is-preload');
           const art = document.querySelector('.article-wrapper');
-          // small delay to match template feel
           setTimeout(function(){ art && art.classList.add('visible'); }, 80);
         });
       })();
