@@ -1,3 +1,9 @@
+/* Unit 7 - School Database Build
+	I used the data which I normalised in the data normalisation task to construct a database in MySQL. 
+    I opted to use MySQL to build on the knowledge I had acquired from completing the Unit 6 Database Design Proposal assignment. This involved creating the database, all tables, identifying data types, and inserting relevant data into the tables.
+    Once the tables were created and values inserted, I ran a few simple test cases to ensure that everything had been created successfully. 
+    This exercise allowed me to understand how to operate queries in SQL, and how to use commands such as WHERE to retrieve data based on certain conditions.*/
+
 -- Create database 
 CREATE DATABASE students;
 USE students; -- select database to insert tables into
